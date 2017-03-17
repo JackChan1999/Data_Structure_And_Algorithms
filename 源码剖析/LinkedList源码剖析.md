@@ -655,7 +655,7 @@ public class LinkedList<E>
 
 1、从源码中很明显可以看出，LinkedList的实现是基于双向循环链表的，且头结点中不存放数据，如下图;
 
-![](http://img.blog.csdn.net/20140629153056171)
+![](../assets/6.6.png)
 
 2、注意两个不同的构造方法。无参构造方法直接建立一个仅包含head节点的空链表，包含Collection的构造方法，先调用无参构造方法建立一个空链表，然后将Collection中的数据加入到链表的尾部后面。
 

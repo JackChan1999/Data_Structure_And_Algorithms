@@ -770,7 +770,7 @@ public class HashMap<K,V>
 ## 3. 几点总结
 1、首先要清楚HashMap的存储结构，如下图所示：
 
-![](http://img.blog.csdn.net/20140701191403764?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbnNfY29kZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![](../assets/6.2.png)
 
 图中，紫色部分即代表哈希表，也称为哈希数组，数组的每个元素都是一个单链表的头节点，链表是用来解决冲突的，如果不同的key映射到了数组的同一位置处，就将其放入单链表中。
 

@@ -10,7 +10,7 @@ HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有�
 ## 2. HashMap的数据结构
 在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，HashMap也不例外。HashMap实际上是一个“链表散列”的数据结构，即数组和链表的结合体。
 
-![hashmap](https://github.com/JackyAndroid/AndroidInterview-Q-A/raw/master/picture/hashmap.jpg)
+![hashmap](../assets/6.1.jpg)
 
 从上图中可以看出，HashMap底层就是一个数组结构，数组中的每一项又是一个链表。当新建一个HashMap的时候，就会初始化一个数组
 
@@ -168,7 +168,7 @@ class HashMapEntry{
 
 ```
 
-![hashmap](http://img.blog.csdn.net/20170105115158470?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![hashmap](../assets/6.2.png)
 
 ## 二次哈希
 
