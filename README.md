@@ -1,5 +1,15 @@
 ![](assets/数据结构.png)
 
+## GitBook 在线阅读，PDF、Mobi、ePub下载
+
+https://www.gitbook.com/book/alleniverson/data-structure-and-algorithms/details
+
+## GitHub托管
+
+https://github.com/JackChan1999/DataStructure
+
+## 数据结构与算法学习之路
+
 [数据结构与算法系列](http://www.cnblogs.com/skywang12345/p/3603935.html)
 
 [编程之法：面试和算法心得](https://github.com/julycoding/The-Art-Of-Programming-By-July)
@@ -14,16 +24,20 @@
 
 ## 目录
 
+* [学数据结构、算法的资源推荐](source/学数据结构、算法的资源推荐.md)
 * 第1章 线性结构
+  * [数据结构与算法基础](线性结构/数据结构.md)
   * [数组和链表](线性结构/数组和链表.md)
+* 第2章 栈与队列
   * [栈](线性结构/栈.md)
   * [队列](线性结构/队列.md)
-* 第2章 树形结构
+* 第3章 递归  
+* 第4章 树
   * [二叉树](树形结构/二叉树.md)
   * [哈夫曼树](树形结构/哈夫曼树.md)
-* 第3章 堆
+* 第5章 堆
   * [堆](堆/堆.md)
-* 第4章 图
+* 第6章 图
   * [邻接矩阵无向图](图/邻接矩阵无向图.md)
   * [邻接矩阵有向图](图/邻接矩阵有向图.md)
   * [邻接表无向图](图/邻接表无向图.md)
@@ -32,21 +46,13 @@
   * [Kruskal算法](图/Kruskal算法.md)
   * [Prim算法](图/Prim算法.md)
   * [拓扑排序](图/拓扑排序.md)
-* 第5章 排序算法
+* 第7章 查找
+* 第8章 排序
   * [排序算法](排序算法/排序算法.md)
-* 第6章 源码剖析
+* 第9章 源码剖析
   * [HashMap、哈希表、哈希函数](源码剖析/HashMap、哈希表、哈希函数.md)
   * [HashMap的实现原理](源码剖析/HashMap的实现原理.md)
   * [HashMap源码剖析](源码剖析/HashMap源码剖析.md)
   * [LinkedHashMap源码剖析](源码剖析/LinkedHashMap源码剖析.md)
   * [LinkedList源码剖析](源码剖析/LinkedList源码剖析.md)
 * [计算机常用基础算法](计算机常用基础算法/计算机常用基础算法.md)
-
-## GitBook 在线阅读，PDF、Mobi、ePub下载
-
-https://www.gitbook.com/book/alleniverson/data-structure-and-algorithms/details
-
-## GitHub托管
-
-https://github.com/JackChan1999/DataStructure
-
