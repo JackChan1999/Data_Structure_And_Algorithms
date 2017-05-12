@@ -1,5 +1,19 @@
 ![](assets/数据结构.png)
 
+[数据结构与算法系列](http://www.cnblogs.com/skywang12345/p/3603935.html)
+
+[编程之法：面试和算法心得](https://github.com/julycoding/The-Art-Of-Programming-By-July)
+
+[计算机常用基础算法](https://github.com/shijiebei2009/Algorithms)
+
+[算法学习笔记](https://github.com/nonstriater/Learn-Algorithms)
+
+[学 [数据结构、算法] 的资源推荐](https://zhuanlan.zhihu.com/p/23191006)
+
+[有哪些学习算法的网站推荐？](https://www.zhihu.com/question/20368410)
+
+## 目录
+
 * 第1章 线性结构
   * [数组和链表](线性结构/数组和链表.md)
   * [栈](线性结构/栈.md)
@@ -27,3 +41,12 @@
   * [LinkedHashMap源码剖析](源码剖析/LinkedHashMap源码剖析.md)
   * [LinkedList源码剖析](源码剖析/LinkedList源码剖析.md)
 * [计算机常用基础算法](计算机常用基础算法/计算机常用基础算法.md)
+
+## GitBook 在线阅读，PDF、Mobi、ePub下载
+
+https://www.gitbook.com/book/alleniverson/data-structure-and-algorithms/details
+
+## GitHub托管
+
+https://github.com/JackChan1999/DataStructure
+
