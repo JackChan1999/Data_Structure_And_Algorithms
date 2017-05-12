@@ -45,3 +45,7 @@
   * [HashMap源码剖析](源码剖析/HashMap源码剖析.md)
   * [LinkedHashMap源码剖析](源码剖析/LinkedHashMap源码剖析.md)
   * [LinkedList源码剖析](源码剖析/LinkedList源码剖析.md)
+
+----
+
+* [计算机常用基础算法](计算机常用基础算法/计算机常用基础算法.md)

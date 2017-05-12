@@ -1,3 +1,5 @@
+![](assets/数据结构.png)
+
 * 第1章 线性结构
   * [数组和链表](线性结构/数组和链表.md)
   * [栈](线性结构/栈.md)
@@ -24,3 +26,4 @@
   * [HashMap源码剖析](源码剖析/HashMap源码剖析.md)
   * [LinkedHashMap源码剖析](源码剖析/LinkedHashMap源码剖析.md)
   * [LinkedList源码剖析](源码剖析/LinkedList源码剖析.md)
+* [计算机常用基础算法](计算机常用基础算法/计算机常用基础算法.md)
