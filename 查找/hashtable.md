@@ -32,13 +32,13 @@ import java.io.*;
 class DataItem
    {                                // (could have more data)
    private int iData;               // data item (key)
-//--------------------------------------------------------------
+-
    public DataItem(int ii)          // constructor
       { iData = ii; }
-//--------------------------------------------------------------
+-
    public int getKey()
       { return iData; }
-//--------------------------------------------------------------
+-
    }  // end class DataItem
 ////////////////////////////////////////////////////////////////
 class HashTable
@@ -181,7 +181,7 @@ class HashTableApp
             }  // end switch
          }  // end while
       }  // end main()
-//--------------------------------------------------------------
+-
    public static String getString() throws IOException
       {
       InputStreamReader isr = new InputStreamReader(System.in);
@@ -189,22 +189,21 @@ class HashTableApp
       String s = br.readLine();
       return s;
       }
-//--------------------------------------------------------------
+-
    public static char getChar() throws IOException
       {
       String s = getString();
       return s.charAt(0);
       }
-//-------------------------------------------------------------
+
    public static int getInt() throws IOException
       {
       String s = getString();
       return Integer.parseInt(s);
       }
-//--------------------------------------------------------------
+-
    }  // end class HashTableApp
 ////////////////////////////////////////////////////////////////
-
 
 ```
 **扩展数组**
@@ -226,13 +225,13 @@ import java.io.*;
 class DataItem
    {                                 // (could have more items)
    private int iData;                // data item (key)
-//--------------------------------------------------------------
+-
    public DataItem(int ii)           // constructor
       { iData = ii; }
-//--------------------------------------------------------------
+-
    public int getKey()
       { return iData; }
-//--------------------------------------------------------------
+-
    }  // end class DataItem
 ////////////////////////////////////////////////////////////////
 class HashTable
@@ -383,7 +382,7 @@ class HashDoubleApp
             }  // end switch
          }  // end while
       }  // end main()
-//--------------------------------------------------------------
+-
    public static String getString() throws IOException
       {
       InputStreamReader isr = new InputStreamReader(System.in);
@@ -391,22 +390,21 @@ class HashDoubleApp
       String s = br.readLine();
       return s;
       }
-//--------------------------------------------------------------
+-
    public static char getChar() throws IOException
       {
       String s = getString();
       return s.charAt(0);
       }
-//-------------------------------------------------------------
+
    public static int getInt() throws IOException
       {
       String s = getString();
       return Integer.parseInt(s);
       }
-//--------------------------------------------------------------
+-
    }  // end class HashDoubleApp
 ////////////////////////////////////////////////////////////////
-
 ```
 
 ## **链地址法**
@@ -610,7 +608,7 @@ class HashChainApp
             }  // end switch
          }  // end while
       }  // end main()
-//--------------------------------------------------------------
+-
    public static String getString() throws IOException
       {
       InputStreamReader isr = new InputStreamReader(System.in);
@@ -618,19 +616,19 @@ class HashChainApp
       String s = br.readLine();
       return s;
       }
-//-------------------------------------------------------------
+
    public static char getChar() throws IOException
       {
       String s = getString();
       return s.charAt(0);
       }
-//-------------------------------------------------------------
+
    public static int getInt() throws IOException
       {
       String s = getString();
       return Integer.parseInt(s);
       }
-//--------------------------------------------------------------
+-
    }  // end class HashChainApp
 ////////////////////////////////////////////////////////////////
 ```
@@ -642,3 +640,15 @@ class HashChainApp
 随机的关键字
 
 使用质数作为取模的基数
+
+# 哈希文件及哈希文件的访问特点
+
+哈希文件也称为散列文件，是利用哈希存储方式组织的文件，亦称为直接存取文件。它类似于哈希表的存储，即根据关键字的特点，设计一个哈希函数和处理冲突的方法，将记录存储到存储设备上。
+
+对于文件来说，它与哈希表还是不同的，磁盘的文件记录通常是成组存放的，若干个记录组成一个存储单位，在哈希文件中，这个存储单位叫作桶(Bucket)。假如一个桶能存放m个记录，当桶中已经有m个同义词记录时，再存放第m+1个同义词记录时就会发生“溢出”。处理“溢出”可采用哈希表中处理冲突的各种方法，但在哈希文件中，主要采用拉链法。
+
+处理冲突时，需要将第m+1个记录放到另一个桶中，通常称此桶为“溢出桶”，相对的，称前m个同义词存储的桶为“基桶”。注意：溢出桶和基桶大小相同，相互之间用指针相连接。
+
+在哈希文件中进行查找时，首先根据给定值求出哈希桶地址，将基桶的记录读入内存，进行顺序查找，若找到关键字等于给定值的记录，则检索成功；当在基桶中没有找到待查找记录时，就沿着指针到所指的溢出桶中进行查找。因此，在构建文件时，希望同一哈希地址的溢出桶和基桶，在磁盘上的物理位置不要相距太远，最好在同一柱面上。而删除记录时，仅需对删除记录标记即可。
+
+哈希文件的文件记录是随机存放的，不需要对记录进行排序；而且其插入删除操作也颇为方便，存取速度快，不需要索引区，节省存储空间。当然，它也有一些缺点，不能进行顺序存储，只能按关键字随机存取，询问方式限于简单询问，在经过多次插入、删除后，可能造成文件结构不合理，需要重新组织文件。
