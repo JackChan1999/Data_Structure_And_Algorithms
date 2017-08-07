@@ -1,4 +1,4 @@
-## 队列的Java实现
+## 顺序队列的Java实现
 
 JDK包Queue中的也提供了"队列"的实现。JDK中的Queue接口就是"队列"，它的实现类也都是队列，用的最多的是LinkedList
 

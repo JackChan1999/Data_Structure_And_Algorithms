@@ -7,6 +7,7 @@
 #define _MYLINKLIST_H_
 
 typedef void LinkList;
+
 /*
 typedef struct _tag_LinkListNode LinkListNode;
 struct _tag_LinkListNode

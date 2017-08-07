@@ -1,10 +1,6 @@
 ## 队列的数组实现
 
 ```java
-// Queue.java
-// demonstrates queue
-// to run this program: C>java QueueApp
-////////////////////////////////////////////////////////////////
 class Queue
    {
    private int maxSize;
@@ -12,8 +8,8 @@ class Queue
    private int front;
    private int rear;
    private int nItems;
-//--------------------------------------------------------------
-   public Queue(int s)          // constructor
+
+   public Queue(int s)          
       {
       maxSize = s;
       queArray = new long[maxSize];
@@ -21,189 +17,181 @@ class Queue
       rear = -1;
       nItems = 0;
       }
-//--------------------------------------------------------------
-   public void insert(long j)   // put item at rear of queue
+
+   public void insert(long j)   
       {
-      if(rear == maxSize-1)         // deal with wraparound
+      if(rear == maxSize-1)         
          rear = -1;
-      queArray[++rear] = j;         // increment rear and insert
-      nItems++;                     // one more item
+      queArray[++rear] = j;         
+      nItems++;                     
       }
-//--------------------------------------------------------------
-   public long remove()         // take item from front of queue
+
+   public long remove()         
       {
-      long temp = queArray[front++]; // get value and incr front
-      if(front == maxSize)           // deal with wraparound
+      long temp = queArray[front++]; 
+      if(front == maxSize)           
          front = 0;
-      nItems--;                      // one less item
+      nItems--;                      
       return temp;
       }
-//--------------------------------------------------------------
-   public long peekFront()      // peek at front of queue
+
+   public long peekFront()      
       {
       return queArray[front];
       }
-//--------------------------------------------------------------
-   public boolean isEmpty()    // true if queue is empty
+
+   public boolean isEmpty()    
       {
       return (nItems==0);
       }
-//--------------------------------------------------------------
-   public boolean isFull()     // true if queue is full
+
+   public boolean isFull()     
       {
       return (nItems==maxSize);
       }
-//--------------------------------------------------------------
-   public int size()           // number of items in queue
+
+   public int size()           
       {
       return nItems;
       }
-//--------------------------------------------------------------
-   }  // end class Queue
-////////////////////////////////////////////////////////////////
+
+   }  
+
 class QueueApp
    {
    public static void main(String[] args)
       {
-      Queue theQueue = new Queue(5);  // queue holds 5 items
-
-      theQueue.insert(10);            // insert 4 items
+      Queue theQueue = new Queue(5);  
+      theQueue.insert(10);            
       theQueue.insert(20);
       theQueue.insert(30);
       theQueue.insert(40);
 
-      theQueue.remove();              // remove 3 items
-      theQueue.remove();              //    (10, 20, 30)
+      theQueue.remove();              
+      theQueue.remove();
       theQueue.remove();
 
-      theQueue.insert(50);            // insert 4 more items
-      theQueue.insert(60);            //    (wraps around)
+      theQueue.insert(50);            
+      theQueue.insert(60);
       theQueue.insert(70);
       theQueue.insert(80);
 
-      while( !theQueue.isEmpty() )    // remove and display
-         {                            //    all items
-         long n = theQueue.remove();  // (40, 50, 60, 70, 80)
+      while( !theQueue.isEmpty() )    
+         {                            
+         long n = theQueue.remove();
          System.out.print(n);
          System.out.print(" ");
          }
       System.out.println("");
-      }  // end main()
-   }  // end class QueueApp
-////////////////////////////////////////////////////////////////
-
+      }  
+   }  
 ```
 
 ## 队列的链表实现
 
 ```java
-// linkQueue.java
-// demonstrates queue implemented as double-ended list
-// to run this program: C>java LinkQueueApp
-////////////////////////////////////////////////////////////////
 class Link
    {
-   public long dData;                // data item
-   public Link next;                 // next link in list
-// -------------------------------------------------------------
-   public Link(long d)               // constructor
+   public long dData;
+   public Link next;
+
+   public Link(long d)               
       { dData = d; }
-// -------------------------------------------------------------
-   public void displayLink()         // display this link
+
+   public void displayLink()         
       { System.out.print(dData + " "); }
-// -------------------------------------------------------------
+
    }  // end class Link
-////////////////////////////////////////////////////////////////
+
 class FirstLastList
    {
-   private Link first;               // ref to first item
-   private Link last;                // ref to last item
-// -------------------------------------------------------------
-   public FirstLastList()            // constructor
+   private Link first;               
+   private Link last;
+
+   public FirstLastList()
       {
-      first = null;                  // no items on list yet
+      first = null;                  
       last = null;
       }
-// -------------------------------------------------------------
-   public boolean isEmpty()          // true if no links
+
+   public boolean isEmpty()          
       { return first==null; }
-// -------------------------------------------------------------
-   public void insertLast(long dd) // insert at end of list
+
+   public void insertLast(long dd) 
       {
-      Link newLink = new Link(dd);   // make new link
-      if( isEmpty() )                // if empty list,
-         first = newLink;            // first --> newLink
+      Link newLink = new Link(dd);   
+      if( isEmpty() ) 
+         first = newLink;    
       else
-         last.next = newLink;        // old last --> newLink
-      last = newLink;                // newLink <-- last
+         last.next = newLink; 
+      last = newLink; 
       }
-// -------------------------------------------------------------
-   public long deleteFirst()         // delete first link
-      {                              // (assumes non-empty list)
+
+   public long deleteFirst()         
+      {          
       long temp = first.dData;
-      if(first.next == null)         // if only one item
-         last = null;                // null <-- last
-      first = first.next;            // first --> old next
+      if(first.next == null)         
+         last = null;     
+      first = first.next;
       return temp;
       }
-// -------------------------------------------------------------
+
    public void displayList()
       {
-      Link current = first;          // start at beginning
-      while(current != null)         // until end of list,
+      Link current = first;          
+      while(current != null)
          {
-         current.displayLink();      // print data
-         current = current.next;     // move to next link
+         current.displayLink();      
+         current = current.next;     
          }
       System.out.println("");
       }
-// -------------------------------------------------------------
-   }  // end class FirstLastList
-////////////////////////////////////////////////////////////////
+
+   }
+
 class LinkQueue
    {
    private FirstLastList theList;
-//--------------------------------------------------------------
-   public LinkQueue()                // constructor
-      { theList = new FirstLastList(); }  // make a 2-ended list
-//--------------------------------------------------------------
-   public boolean isEmpty()          // true if queue is empty
+
+   public LinkQueue()
+      { theList = new FirstLastList(); }
+
+   public boolean isEmpty()
       { return theList.isEmpty(); }
-//--------------------------------------------------------------
-   public void insert(long j)        // insert, rear of queue
+
+   public void insert(long j)
       { theList.insertLast(j); }
-//--------------------------------------------------------------
-   public long remove()              // remove, front of queue
+
+   public long remove() 
       {  return theList.deleteFirst();  }
-//--------------------------------------------------------------
+
    public void displayQueue()
       {
       System.out.print("Queue (front-->rear): ");
       theList.displayList();
       }
-//--------------------------------------------------------------
-   }  // end class LinkQueue
-////////////////////////////////////////////////////////////////
+
+   }  
+
 class LinkQueueApp
    {
    public static void main(String[] args)
       {
       LinkQueue theQueue = new LinkQueue();
-      theQueue.insert(20);                 // insert items
+      theQueue.insert(20);                 
       theQueue.insert(40);
 
-      theQueue.displayQueue();             // display queue
+      theQueue.displayQueue();             
 
-      theQueue.insert(60);                 // insert items
+      theQueue.insert(60);                 
       theQueue.insert(80);
 
-      theQueue.displayQueue();             // display queue
+      theQueue.displayQueue();             
 
-      theQueue.remove();                   // remove items
+      theQueue.remove();                   
       theQueue.remove();
 
-      theQueue.displayQueue();             // display queue
-      }  // end main()
-   }  // end class LinkQueueApp
-////////////////////////////////////////////////////////////////
+      theQueue.displayQueue();   
+      }  
+   }  
 ```

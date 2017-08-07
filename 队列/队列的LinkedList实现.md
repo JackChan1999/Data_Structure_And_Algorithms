@@ -5,14 +5,16 @@ Java的 Collection集合 中自带的"队列"(LinkedList)的示例
 ```java
 import java.util.Stack;
 
-/**
- * 用“栈”实现队列
- */
+// 用“栈”实现队列
 public class StackList<T> {
 
-    // 向队列添加数据时：(01) 将“已有的全部数据”都移到mIn中。 (02) 将“新添加的数据”添加到mIn中。
+    // 向队列添加数据时：
+  	// (01) 将“已有的全部数据”都移到mIn中。 
+  	// (02) 将“新添加的数据”添加到mIn中。
     private Stack<T> mIn  = null;
-    // 从队列获取元素时：(01) 将“已有的全部数据”都移到mOut中。(02) 返回并删除mOut栈顶元素。
+    // 从队列获取元素时：
+  	// (01) 将“已有的全部数据”都移到mOut中。
+  	// (02) 返回并删除mOut栈顶元素。
     private Stack<T> mOut = null;
     // 统计计数
     private int mCount = 0;

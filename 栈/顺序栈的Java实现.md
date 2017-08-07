@@ -1,4 +1,4 @@
-## 栈的Java实现
+## 顺序栈的Java实现
 
 JDK包中也提供了"栈"的实现，它就是集合框架中的Stack类。本部分给出2种Java实现
 
@@ -104,9 +104,9 @@ stack size()=3
 ```
 结果说明：GeneralArrayStack是通过数组实现的栈，而且GeneralArrayStack中使用到了泛型
 
-### 栈Stack
+### 集合框架中的Stack
 
-Java的 Collection集合 中自带的"栈"(stack)的示例
+Java的 Collection 集合中自带的"栈"(stack)的示例
 
 ```java
 import java.util.Stack;
