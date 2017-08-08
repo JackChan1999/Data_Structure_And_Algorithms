@@ -6,6 +6,18 @@
 
 ![](img/prim.png)
 
+```c++
+class MinSpanTree {        //生成树的类定义
+public:
+     MinSpanTree ( ) : CurrentNumArc (0)
+       { arctable = new MSTArcNode[MaxNumArc ]; }
+     int Insert ( MSTArcNode & e ); //将边e加到最小生成树中
+protected:
+     MSTArcNode  *arctable;      //存放边的数组
+     int CurrentNumArc;           //当前边数
+};
+```
+
 在利用普里姆算法构造最小生成树过程中，需要设置了一个辅助数组closearc[ ]，以记录从V-U中顶点到U中顶点具有最小权值的边。对每一个顶点v ∈ V-U，在辅助数组中有一个分量closearc[v]，它包括两个域：lowweight和nearvertex。其中，lowweight中存放顶点v到U中的各顶点的边上的当前最小权值(lowweight=0表示v ∈ U)；nearvertex记录顶点v到U中具有最小权值的那条边的另一个邻接顶点u（nearvertex=-1表示该顶点v为开始顶点）。在下面的普里姆算法描述中，连通网络采用邻接矩阵作为存储结构，并假设普里姆算法从顶点A（设顶点A的序号为0）出发（即u0=0）。 
 
 普里姆算法步骤如下：
@@ -23,3 +35,47 @@
 下图给出了对于前图（a）所示的连通网络，按普里姆算法构造最小生成树时辅助数组closearc[ ]的变化过程。
 
 ![](img/prim2.png)
+
+普里姆算法的C++描述
+
+```c++
+class MinSpanTree;
+class CloseArcType {        //辅助数组closearc[ ]的元素类定义
+friend class MinSpanTree;
+private:
+    float lowweight;   //边的代价（权值）
+    int nearvertex;  //U中的顶点
+};
+
+void Graph<string, float> ::Prim ( MinSpanTree &T ) {
+    int Num = NumberOfVertexes ( );  //取连通网络的顶点个数
+    CloseArcType * closearc = new closearctype[Num];
+    MSTArcNode e;    //定义最小生成树边结点辅助变量
+    float min ;
+    int v, i, j;
+    for ( i = 1; i < Num; i++ ) { //初始化辅助数组closearc[ ]
+        closearc[i].lowweight = Arcs[0][i];
+        closearc[i].nearvertex = 0;
+    }
+	closearc[0].lowweight = 0;   //顶点0加到生成树顶点集合
+    closearc[0].nearvertex = -1;  
+    for ( i = 1; i < Num; i++ ) { //循环n-1次, 加入n-1条边
+       min = MAXNUM; v = 0;
+       for ( int j = 0; j < Num; j++ )
+         if (closearc[j].lowweight != 0 && closearc[j].lowweight < min )
+            { v = j;  min = closearc[j].lowweight; }
+       //选取两个邻接顶点分别在U-V和U且具有最小权值的边
+       if ( v ) {    //v==0表示再也找不到所求的边
+        e.adjvex1 = closearc[v].nearvertex; e.adjvex2 = v;
+        e.weight = closearc[v].lowweight;           
+        T.Insert (e);     //把选出的边加入到生成树中
+        closearc[v].lowweight = 0; //把顶点v加入U中
+       for ( j = 1; j < Num; j++ )
+         if (closearc[j].lowweight !=0 && Arcs[v][j]<closearc[j].lowweight ) {
+ 			   // 对U-V中的每一个顶点考察是否要修改它在辅助数组中的值
+               closearc[j].lowweight = Arcs[v][j];
+               closearc[j].nearvertex = v;
+            }
+      }
+}
+```
