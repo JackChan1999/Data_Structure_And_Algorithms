@@ -18,7 +18,7 @@
 
 ![](img/floyd算法.png)
 
-弗洛伊德算法的实现
+Floyd算法的实现1（数据结构C++实现）
 
 ```c++
 void Graph :: Floyd ( int n ) {
@@ -40,5 +40,30 @@ void Graph :: Floyd ( int n ) {
               }//缩短路径长度, 经过 k 到 j 
         }
     } 
+}
+```
+Floyd算法的实现2（数据结构严蔚敏版）
+
+算法步骤
+
+![](img/Floyd算法5.png)
+
+```c++
+void ShortestPath_Floyed(AMGraph G){ 
+    //用Floyd算法求有向网G中各对顶点i和j之间的最短路径 
+	int i , j , k ;
+    for (i = 0; i < G.vexnum; ++i)  //各对结点之间初始已知路径及距离 
+        for(j = 0; j < G.vexnum; ++j){ 
+            D[i][j] = G.arcs[i][j]; 
+            if(D[i][j] < MaxInt && i != j)  Path[i][j]=i; //如果i和j之间有弧，则将j的前驱置为i 
+            else Path [i][j] = -1;  //如果i和j之间无弧，则将j的前驱置为-1 
+		}
+		for(k = 0; k < G.vexnum; ++k) 
+			for(i = 0; i < G.vexnum; ++i) 
+				for(j = 0; j < G.vexnum; ++j)
+					if(D[i][k] + D[k][j] < D[i][j]){ //从i经k到j的一条路径更短 
+						D[i][j] = D[i][k]+D[k][j];   //更新D[i][j] 
+						Path[i][j] = Path[k][j];     //更改j的前驱为k 
+					}
 }
 ```

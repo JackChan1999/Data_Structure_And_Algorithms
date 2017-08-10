@@ -2,9 +2,15 @@
 
 哈希表的缺点：基于数组，数组创建后难于扩展。不能有序遍历
 
+散列技术既是一种存储技术，也是一种查找技术。
+
+散列技术的记录之间不存在什么逻辑关系，它只与关键字有关联。因此散列主要是面向查找的存储结构。
+
+散列技术最适合的求解问题是查找与给定值相等的记录。
+
 数组 + 链表
 
-# 哈希化
+## 哈希化
 
 直接寻址
 
@@ -15,11 +21,26 @@
 - 除留余数发
 - 乘法散列
 
-# 冲突（碰撞）
+## **哈希函数**
 
-## **开放地址法**
+快速的计算
 
-### **线性探测**
+随机的关键字
+
+使用质数作为取模的基数
+
+- 直接定址法
+- 平方取中法
+- 折叠法
+- 除留余数法
+
+## 冲突（碰撞）
+
+key1 ≠ key2，但是f(key1) = f(key2)
+
+### **开放地址法**
+
+#### **线性探测**
 
 h(k,i) = (h(k)+i) mod m  i = 0,1,2...m-1
 
@@ -32,13 +53,13 @@ import java.io.*;
 class DataItem
    {                                // (could have more data)
    private int iData;               // data item (key)
--
+
    public DataItem(int ii)          // constructor
       { iData = ii; }
--
+
    public int getKey()
       { return iData; }
--
+
    }  // end class DataItem
 ////////////////////////////////////////////////////////////////
 class HashTable
@@ -181,7 +202,7 @@ class HashTableApp
             }  // end switch
          }  // end while
       }  // end main()
--
+
    public static String getString() throws IOException
       {
       InputStreamReader isr = new InputStreamReader(System.in);
@@ -189,7 +210,7 @@ class HashTableApp
       String s = br.readLine();
       return s;
       }
--
+
    public static char getChar() throws IOException
       {
       String s = getString();
@@ -201,18 +222,17 @@ class HashTableApp
       String s = getString();
       return Integer.parseInt(s);
       }
--
+
    }  // end class HashTableApp
 ////////////////////////////////////////////////////////////////
-
 ```
 **扩展数组**
 
-### **二次探测**
+#### **二次探测**
 
 h(k,i) = (h(k)+i^2) mod m  i = 0,1,2...m-1
 
-### **双重散列/二次哈希**
+#### **双重散列/二次哈希**
 
 h(k,i) = (h1(k)+ih2(k)) mod m  i = 0,1,2...m-1
 
@@ -225,13 +245,13 @@ import java.io.*;
 class DataItem
    {                                 // (could have more items)
    private int iData;                // data item (key)
--
+
    public DataItem(int ii)           // constructor
       { iData = ii; }
--
+
    public int getKey()
       { return iData; }
--
+
    }  // end class DataItem
 ////////////////////////////////////////////////////////////////
 class HashTable
@@ -382,7 +402,7 @@ class HashDoubleApp
             }  // end switch
          }  // end while
       }  // end main()
--
+
    public static String getString() throws IOException
       {
       InputStreamReader isr = new InputStreamReader(System.in);
@@ -390,7 +410,7 @@ class HashDoubleApp
       String s = br.readLine();
       return s;
       }
--
+
    public static char getChar() throws IOException
       {
       String s = getString();
@@ -402,14 +422,16 @@ class HashDoubleApp
       String s = getString();
       return Integer.parseInt(s);
       }
--
+
    }  // end class HashDoubleApp
 ////////////////////////////////////////////////////////////////
 ```
 
-## **链地址法**
+### **链地址法**
 
 数组 + 链表，桶结构，装载因子
+
+将所有关键字为同义词的记录存储咋一个单链表中。
 
 ![](img/链地址法.png)
 
@@ -608,7 +630,7 @@ class HashChainApp
             }  // end switch
          }  // end while
       }  // end main()
--
+
    public static String getString() throws IOException
       {
       InputStreamReader isr = new InputStreamReader(System.in);
@@ -633,15 +655,9 @@ class HashChainApp
 ////////////////////////////////////////////////////////////////
 ```
 
-# **哈希函数**
+### 公共溢出区
 
-快速的计算
-
-随机的关键字
-
-使用质数作为取模的基数
-
-# 哈希文件及哈希文件的访问特点
+## 哈希文件及哈希文件的访问特点
 
 哈希文件也称为散列文件，是利用哈希存储方式组织的文件，亦称为直接存取文件。它类似于哈希表的存储，即根据关键字的特点，设计一个哈希函数和处理冲突的方法，将记录存储到存储设备上。
 

@@ -1,6 +1,6 @@
 ## 克鲁斯卡尔(Kruskal)算法
 
-克鲁斯卡尔(Kruskal)算法的基本思想是：设一个有n个顶点的连通网络G＝{V，E}，最初先构造一个包括全部n个顶点和0条边的森林 F ＝ { T0、T1、…、Tn-1 }，以后每一步向F中加入一条边（v、u），该边应当是所依附的两个顶点v和u分别在森林F的两棵不同的树上的所有边中具有最小权值的边。由于这条边的加入，使F中的某两棵树合并为一棵，树的棵数减一。如此，经过n-1步，最终得到一棵有n-1条边且各边权值总和达到最小的生成树——最小生成树。
+克鲁斯卡尔(Kruskal)算法的基本思想是：设一个有n个顶点的连通网络G＝{V，E}，最初先构造一个包括全部n个顶点和0条边的森林 F ＝ { T<sub>0</sub>、T<sub>1</sub>、…、T<sub>n-1</sub> }，以后每一步向F中加入一条边（v、u），该边应当是所依附的两个顶点v和u分别在森林F的两棵不同的树上的所有边中具有最小权值的边。由于这条边的加入，使F中的某两棵树合并为一棵，树的棵数减一。如此，经过n-1步，最终得到一棵有n-1条边且各边权值总和达到最小的生成树——最小生成树。
 
 对于前图(a)所示的连通网络，下图中(a)~(f)给出了按克鲁斯卡尔算法生成最小生成树的过程。 
 
@@ -73,3 +73,49 @@ void Graph<string, float> ::Kruskal ( MinSpanTree& T ) {
 		 }
 }
 ```
+![](img/kruskal2.png)
+
+![](img/kruskal3.png)
+
+可以看出，kruskal算法逐步增加生成树的边，与prim算法相比，可称为“加边法”。
+
+kruskal算法的实现
+
+```c
+//辅助数组Edges的定义
+struct{
+	VerTexType Head;						//边的始点
+	VerTexType Tail;						//边的终点
+	ArcType lowcost;						//边上的权值
+}Edge[(MVNum * (MVNum - 1)) / 2];
+int Vexset[MVNum];							//辅助数组Vexset的定义
+```
+
+算法步骤
+
+![](img/kruskal4.png)
+
+算法描述
+
+```c
+void MiniSpanTree_Kruskal(AMGraph G){ 
+    //无向网G以邻接矩阵形式存储，构造G的最小生成树T，输出T的各条边     
+    int i , j , v1 , v2 , vs1 , vs2;
+	Sort(G);                 							//将数组Edge中的元素按权值从小到大排序 
+	for(i = 0; i < G.vexnum; ++i)     					//辅助数组，表示各顶点自成一个连通分量 
+        Vexset[i] = i;
+    for(i = 0; i < G.arcnum; ++i){      
+		//依次查看排好序的数组Edge中的边是否在同一连通分量上     
+		v1 =LocateVex(G, Edge[i].Head);     			//v1为边的始点Head的下标 
+		v2 =LocateVex(G, Edge[i].Tail);     			//v2为边的终点Tail的下标 
+		vs1 = Vexset[v1];       						//获取边Edge[i]的始点所在的连通分量vs1 
+		vs2 = Vexset[v2];       						//获取边Edge[i]的终点所在的连通分量vs2 
+		if(vs1 != vs2){         						//边的两个顶点分属不同的连通分量 
+			cout << Edge[i].Head << "-->" << Edge[i].Tail << endl;		//输出此边 
+			for(j = 0; j < G.vexnum; ++j)      			//合并vs1和vs2两个分量，即两个集合统一编号 
+				if(Vexset[j] == vs2) Vexset[j] = vs1;	//集合编号为vs2的都改为vs1 
+		}
+    }
+}
+```
+

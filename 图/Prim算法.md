@@ -1,6 +1,6 @@
 ## 普里姆(Prim)算法
 
-普里姆(Prim)算法的基本思想是：假设连通网络为N＝(V，E)；TE为N的最小生成树上边的集合，开始时TE=∅，U为算法在构造最小生成树过程中已得到的顶点集，开始时U={u0}（u0 ∈ V）。算法从N中的某一顶点u0出发，选择与u0关联的具有最小权值的边(u0、vi)，将顶点vi加入到生成树的顶点集合U中，(u0，vi)加入到集合TE中，以后每一步从一个顶点在U中，而另一个顶点在V-U中的各条边当中选择权值最小的边(u、v)（u ∈ U，v ∈ V-U），把顶点v加入到集合U中，边(v、u)加入到集合TE中。如此重复，直到网络中的所有顶点都加入到生成树顶点集合U（U=V）中为止。此时，TE中刚好有n-1条边，则T=（V，TE）为N的最小生成树。
+普里姆(Prim)算法的基本思想是：假设连通网络为N＝(V，E)；TE为N的最小生成树上边的集合，开始时TE=∅，U为算法在构造最小生成树过程中已得到的顶点集，开始时U={u<sub>0</sub>}（u<sub>0</sub> ∈ V）。算法从N中的某一顶点u<sub>0</sub>出发，选择与u<sub>0</sub>关联的具有最小权值的边(u<sub>0</sub>、v<sub>i</sub>)，将顶点v<sub>i</sub>加入到生成树的顶点集合U中，(u<sub>0</sub>，v<sub>i</sub>)加入到集合TE中，以后每一步从一个顶点在U中，而另一个顶点在V-U中的各条边当中选择权值最小的边(u、v)（u ∈ U，v ∈ V-U），把顶点v加入到集合U中，边(v、u)加入到集合TE中。如此重复，直到网络中的所有顶点都加入到生成树顶点集合U（U=V）中为止。此时，TE中刚好有n-1条边，则T=（V，TE）为N的最小生成树。
 
 对于前图（a）所示的连通网络，下图(a)~(f)给出了按普里姆算法从顶点A开始构造最小生成树的过程。 
 
@@ -18,7 +18,7 @@ protected:
 };
 ```
 
-在利用普里姆算法构造最小生成树过程中，需要设置了一个辅助数组closearc[ ]，以记录从V-U中顶点到U中顶点具有最小权值的边。对每一个顶点v ∈ V-U，在辅助数组中有一个分量closearc[v]，它包括两个域：lowweight和nearvertex。其中，lowweight中存放顶点v到U中的各顶点的边上的当前最小权值(lowweight=0表示v ∈ U)；nearvertex记录顶点v到U中具有最小权值的那条边的另一个邻接顶点u（nearvertex=-1表示该顶点v为开始顶点）。在下面的普里姆算法描述中，连通网络采用邻接矩阵作为存储结构，并假设普里姆算法从顶点A（设顶点A的序号为0）出发（即u0=0）。 
+在利用普里姆算法构造最小生成树过程中，需要设置了一个辅助数组closearc[ ]，以记录从V-U中顶点到U中顶点具有最小权值的边。对每一个顶点v ∈ V-U，在辅助数组中有一个分量closearc[v]，它包括两个域：lowweight和nearvertex。其中，lowweight中存放顶点v到U中的各顶点的边上的当前最小权值(lowweight=0表示v ∈ U)；nearvertex记录顶点v到U中具有最小权值的那条边的另一个邻接顶点u（nearvertex=-1表示该顶点v为开始顶点）。在下面的普里姆算法描述中，连通网络采用邻接矩阵作为存储结构，并假设普里姆算法从顶点A（设顶点A的序号为0）出发（即u<sub>0</sub>=0）。 
 
 普里姆算法步骤如下：
 
@@ -77,5 +77,55 @@ void Graph<string, float> ::Prim ( MinSpanTree &T ) {
                closearc[j].nearvertex = v;
             }
       }
+}
+```
+## prim算法
+
+![](img/prim3.png)
+
+可以看出，prim算法不断增加U中的顶点，可称为“加点法”。
+
+![](img/prim4.png)
+
+算法步骤
+
+![](img/prim5.png)
+
+算法描述
+
+```c
+//辅助数组的定义，用来记录从顶点集U到V-U的权值最小的边
+struct{
+	VerTexType adjvex;						//最小边在U中的那个顶点
+	ArcType lowcost;						//最小边上的权值
+}closedge[MVNum];
+```
+
+```c
+void MiniSpanTree_Prim(AMGraph G, VerTexType u){ 
+    //无向网G以邻接矩阵形式存储，从顶点u出发构造G的最小生成树T，输出T的各条边  
+	int k , j , i;
+	VerTexType u0 , v0;
+    k =LocateVex(G, u);           				//k为顶点u的下标 
+    for(j = 0; j < G.vexnum; ++j){     			//对V-U的每一个顶点vi，初始化closedge[i] 
+		if(j != k){  
+			closedge[j].adjvex = u;
+			closedge[j].lowcost = G.arcs[k][j];	//{adjvex, lowcost}
+		}
+	}
+	closedge[k].lowcost = 0;        			//初始，U = {u}
+	for(i = 1; i < G.vexnum; ++i){     			//选择其余n-1个顶点，生成n-1条边(n= G.vexnum) 
+		k = Min(G);  
+		//求出T的下一个结点：第k个顶点，closedge[k]中存有当前最小边 
+		u0 = closedge[k].adjvex;     			//u0为最小边的一个顶点，u0∈U 
+		v0 = G.vexs[k];            				//v0为最小边的另一个顶点，v0∈V-U 
+		cout << "边  " <<u0 << "--->" << v0 << endl;//输出当前的最小边(u0, v0) 
+		closedge[k].lowcost = 0;   		//第k个顶点并入U集 
+		for(j = 0; j < G.vexnum; ++j) 
+			if(G.arcs[k][j] < closedge[j].lowcost){	//新顶点并入U后重新选择最小边 
+				closedge[j].adjvex = G.vexs[k];
+				closedge[j].lowcost = G.arcs[k][j];
+			}
+	}
 }
 ```

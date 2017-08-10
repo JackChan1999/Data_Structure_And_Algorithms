@@ -42,7 +42,7 @@ public:
 }
 ```
 
-迪杰斯特拉算法的实现1
+### 迪杰斯特拉算法的实现1（数据结构C++实现）
 
 ```c++
 void Graph :: ShortestPath ( int n, int v ){
@@ -84,7 +84,11 @@ void Graph :: ShortestPath ( int n, int v ){
   	}
 } 
 ```
-迪杰斯特拉算法的实现2
+### 迪杰斯特拉算法的实现2（数据结构严蔚敏版）
+
+算法步骤
+
+![](img/dijkstra.png)
 
 ```c++
 void ShortestPath_DIJ(AMGraph G, int v0){ 
@@ -123,7 +127,7 @@ void ShortestPath_DIJ(AMGraph G, int v0){
 }
 ```
 
-迪杰斯特拉算法的实现3
+### 迪杰斯特拉算法的实现3（大话数据结构）
 
 ```c++
 // Dijkstra算法，求有向网G的v0顶点到其余顶点v的最短路径P[v]及带权长度D[v]   
