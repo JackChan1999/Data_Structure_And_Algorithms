@@ -52,7 +52,7 @@ void Graph :: ShortestPath ( int n, int v ){
   	path = new int[n];
   	s = new int[n]; 
   	// 选择不在集合S中且具有最短路径的顶点u
-    for ( int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         dist[i] = Arcs[v][i]; //dist数组初始化
         s[i] = 0;  
       
@@ -61,24 +61,24 @@ void Graph :: ShortestPath ( int n, int v ){
         }else{
           	path[i] = -1;//path数组初始化
         }
+    }
         
-    	S[v] = 1; //顶点v加入顶点集合s
-		for ( i = 0; i < n-1; i++ ){
-        	min = MAXNUM;  
-          	u = v;
-        }
-      
-        for ( int j = 0; j < n; j++ ){
+    S[v] = 1; //顶点v加入顶点集合s
+	for (i = 0; i < n-1; i++){
+    	min = MAXNUM;  
+      	u = v;
+    
+        for (int j = 0; j < n; j++){
              if ( !s[j] && dist[j] < min ){
              	u = j;  
              	min = dist[j]; 
              }
         }
         s[u] = 1; //将顶点u加入集合S
-        for ( int w = 0; w < n; w++ ){//修改dist和path
-              if ( !s[w] && dist[u] + Arcs[u][w] < dist[w] ) {
+        for (int w = 0; w < n; w++){//修改dist和path
+              if ( !s[w] && (dist[u] + Arcs[u][w]) < dist[w] ) {
               		dist[w] = dist[u] + Arcs [u][w]; 
-              		path[w] = u;  
+              		path[w] = u;
               }
         }
   	}
@@ -118,7 +118,7 @@ void ShortestPath_DIJ(AMGraph G, int v0){
 				min = D[w];
 			}      	
 		S[v]=true;                   	//将v加入S 
-		for(w = 0;w < n; ++w)           //更新从v0出发到集合V?S上所有顶点的最短路径长度 
+		for(w = 0;w < n; ++w)           //更新从v0出发到集合V-S上所有顶点的最短路径长度 
 			if(!S[w] && (D[v] + G.arcs[v][w] < D[w])){ 
 				D[w] = D[v] + G.arcs[v][w];  //更新D[w] 
 				Path [w] = v;              //更改w的前驱为v 

@@ -25,12 +25,12 @@ void Graph :: Floyd ( int n ) {
     for ( int i = 0; i < n; i++ ){    //矩阵A(-1)与path(-1)初始化
         for ( int j = 0; j < n; j++ ) {
             a[i][j] = Arcs[i][j];
-            if ( i <> j && a[i][j] < MAXNUM ) 
+            if ( i != j && a[i][j] < MAXNUM ) 
                 path[i][j] = i;   //从 i 到 j 有直接的路径（弧） 
             else path[i][j] = -1; //从 i 到 j 没直接的路径（弧）
         }   
     }
-
+	// 从i号顶点到j号顶点只经过前k号点的最短路径
     for ( int k = 0; k < n; k++ ){     //产生A(k)及path(k)
         for ( i = 0; i < n; i++ ){
           for ( j = 0; j < n; j++ )
@@ -58,6 +58,7 @@ void ShortestPath_Floyed(AMGraph G){
             if(D[i][j] < MaxInt && i != j)  Path[i][j]=i; //如果i和j之间有弧，则将j的前驱置为i 
             else Path [i][j] = -1;  //如果i和j之间无弧，则将j的前驱置为-1 
 		}
+  		// 从i号顶点到j号顶点只经过前k号点的最短路径
 		for(k = 0; k < G.vexnum; ++k) 
 			for(i = 0; i < G.vexnum; ++i) 
 				for(j = 0; j < G.vexnum; ++j)
