@@ -10,11 +10,13 @@
 class MinSpanTree {        //生成树的类定义
 public:
      MinSpanTree ( ) : CurrentNumArc (0)
-       { arctable = new MSTArcNode[MaxNumArc ]; }
+     { 
+       	arctable = new MSTArcNode[MaxNumArc];
+     }
      int Insert ( MSTArcNode & e ); //将边e加到最小生成树中
 protected:
      MSTArcNode  *arctable;      //存放边的数组
-     int CurrentNumArc;           //当前边数
+     int CurrentNumArc;          //当前边数
 };
 ```
 
@@ -44,7 +46,7 @@ class CloseArcType {        //辅助数组closearc[ ]的元素类定义
 friend class MinSpanTree;
 private:
     float lowweight;   //边的代价（权值）
-    int nearvertex;  //U中的顶点
+    int nearvertex;    //U中的顶点
 };
 
 void Graph<string, float> ::Prim ( MinSpanTree &T ) {

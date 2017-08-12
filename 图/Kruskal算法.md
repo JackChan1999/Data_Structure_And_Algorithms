@@ -6,7 +6,7 @@
 
 ![](img/最小生成树2.png)
 
-在克鲁斯卡尔算法中，利用最小堆来存放连通网络中的边，堆中每个元素代表连通网络中的一条边，它有三个域组成：adjvex1、adjvex2和weight，其中adjvex1和adjvex2存储该边所依附的两个顶点的序号，weight存储边上的权值；在利用并查集存放所有连通分量，同一个连通分量的顶点组成并查集的一个子集（等价类）。
+在克鲁斯卡尔算法中，利用最小堆来存放连通网络中的边，堆中每个元素代表连通网络中的一条边，它有三个域组成：adjvex1、adjvex2和weight，其中adjvex1和adjvex2存储该边所依附的两个顶点的序号，weight存储边上的权值；再利用并查集存放所有连通分量，同一个连通分量的顶点组成并查集的一个子集（等价类）。
 
 克鲁斯卡尔算法步骤如下：
 
@@ -26,16 +26,20 @@
 const int MAXNUM = 机器可表示的最大整数
 const int MaxNumArc = 20   //图中最大的边数
 class MinSpanTree;
+
 class MSTArcNode {        //生成树边结点的类定义
 friend class MinSpanTree;
 private:
     int adjvex1, adjvex2;  //一条边所依附的两个顶点
     float weight;          //边的代价（权值）
 };
+
 class MinSpanTree {        //生成树的类定义
 public:
-     MinSpanTree ( ) : CurrentNumArc (0)
-       { arctable = new MSTArcNode[MaxNumArc ]; }
+     MinSpanTree():CurrentNumArc(0)
+     { 
+       	arctable = new MSTArcNode[MaxNumArc]; 
+     }
      int Insert ( MSTArcNode & e ); //将边e加到最小生成树中
 protected:
      MSTArcNode  *arctable;      //存放边的数组
@@ -54,23 +58,30 @@ void Graph<string, float> ::Kruskal ( MinSpanTree& T ) {
     int v, u, i = 1;
     MSTArcNode  e;                     //边结点辅助单元
     MinHeap<MSTArcNode> h (CurrentNumArcs); 
-    int Num = NumberOfVertexes ( ) ;     //取图的顶点个数
+    int Num = NumberOfVertexes ( ) ;   //取图的顶点个数
     UFSets f (Vertexes, Num);         
-    for ( u = 0; u < Num; u++ ) //建立初始最小堆h
-       for ( v = u +1; v < Num; v++ )
-       if ( Arcs[u][v] != MAXNUM ) {    //把图中的所有边
-         e.adjvex1 = u;  e.adjvex2 = v;    e.weight = Arcs [u][v]; 
-         h.Insert (e);  //把e插入堆      }
-		 while ( i < Num ) {    //最小生成树中的边数不到顶点数减一
-		          e = h.DeleteTop ( );   //从堆中退出一条边
-		          u = f.Find ( e.adjvex1 );    //取两个顶点所在的等价类的根
-		          v = f.Find ( e.adjvex2 );
-		          if ( u != v ) {       //如果两个顶点不在同一连通分量
-		             f.Union ( u, v ); //合并
-		             T.Insert ( e );      //该边存入最小生成树T
-		             i++; //计数器自增
-		          }
-		 }
+    for ( u = 0; u < Num; u++ ){ //建立初始最小堆h
+       for ( v = u +1; v < Num; v++ ){
+            if ( Arcs[u][v] != MAXNUM ){ //把图中的所有边插入堆 
+              	e.adjvex1 = u;  
+              	e.adjvex2 = v;    
+              	e.weight = Arcs [u][v]; 
+              	h.Insert (e);  //把e插入堆      
+            }
+        }
+    }
+	while ( i < Num ) //最小生成树中的边数不到顶点数减一
+    {    
+	   e = h.DeleteTop ( );      //从堆中退出一条边
+	   u = f.Find ( e.adjvex1 ); //取两个顶点所在的等价类的根
+	   v = f.Find ( e.adjvex2 );
+	   if ( u != v ) //如果两个顶点不在同一连通分量
+       {       
+	      f.Union ( u, v ); //合并
+	      T.Insert ( e );   //该边存入最小生成树T
+	      i++; //计数器自增
+	   }
+	}
 }
 ```
 ![](img/kruskal2.png)
@@ -84,11 +95,11 @@ kruskal算法的实现
 ```c
 //辅助数组Edges的定义
 struct{
-	VerTexType Head;						//边的始点
-	VerTexType Tail;						//边的终点
-	ArcType lowcost;						//边上的权值
+	VerTexType Head;				//边的始点
+	VerTexType Tail;				//边的终点
+	ArcType lowcost;				//边上的权值
 }Edge[(MVNum * (MVNum - 1)) / 2];
-int Vexset[MVNum];							//辅助数组Vexset的定义
+int Vexset[MVNum];					//辅助数组Vexset的定义
 ```
 
 算法步骤
