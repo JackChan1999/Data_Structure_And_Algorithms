@@ -6,7 +6,7 @@
 
 ## 用顶点表示活动的网络 
 
-一般地，可以用有向图表示一个工程。在这种有向图中，用顶点表示活动，用弧&lt;i,j>表示活动i必须在活动j开始之前完成。这种有向图叫做用顶点表示活动的网络(Activity 0n Vertex)，记作AOV网络。
+一般地，可以用有向图表示一个工程。在这种有向图中，用顶点表示活动，用弧<i,j>表示活动i必须在活动j开始之前完成。这种有向图叫做用顶点表示活动的网络(Activity 0n Vertex)，记作AOV网络。
 
 计算机专业学生的学习就是一个工程，每一门课程的学习就是整个工程中的一个活动。右图给出了若干门必修的课程，及其先修关系。 
 
@@ -16,10 +16,12 @@
 
 检测AOV网络中是否存在有向环的一种方法是对AOV网络构造它的拓扑有序序列。即将AOV网络中各个顶点排列成一个线性有序的序列，使得AOV网络中所有的前驱和后继关系都能得到满足。这种构造AOV网络全部顶点的拓扑有序序列的运算就叫做拓扑排序。 
 
+所谓拓扑排序，其实就是对一个有向图构造拓扑序列的过程。
+
 例如，对学生课程先修关系图进行拓扑排序，得到的拓扑有序序列为：
 
 ```
-C1 , C2 , C3 , C4 , C5 , C6 , C8 , C9 , C7 
+C1 , C2 , C3 , C4 , C5 , C6 , C8 , C9 , C7
 或  
 C1 , C8 , C9 , C2 , C5 , C3 , C4 , C7 , C6
 ```
@@ -38,7 +40,7 @@ C1 , C8 , C9 , C2 , C5 , C3 , C4 , C7 , C6
 
 在拓扑排序算法中，AOV网络可以用邻接表存储。为了方便查找入度为0的顶点，在邻接表中增设了一个顶点入度数组InDegree[]，以记录各个顶点的入度。
 
-入度数组InDegree[]的初始化由图的构造函数完成，在输入弧数据之前，先令InDegree[i]＝0(i＝0，1，…，n-1)。以后每输入一条弧&lt;i,j>，在建立一个弧结点，并将它插入到相应弧链表中的同时，顶点j的入度数增加1。下图给出AOV网络的邻接表表示的例子。
+入度数组InDegree[]的初始化由图的构造函数完成，在输入弧数据之前，先令InDegree[i]＝0(i＝0，1，…，n-1)。以后每输入一条弧&lt;i,j>，再建立一个弧结点，并将它插入到相应弧链表中的同时，顶点j的入度数增加1。下图给出AOV网络的邻接表表示的例子。
 
 ![](img/拓扑排序.png)
 
@@ -46,12 +48,12 @@ C1 , C8 , C9 , C2 , C5 , C3 , C4 , C7 , C6
 
 ```c++
 class Graph {
-friend class <int,int> VertexNode;
+friend class <int,char> VertexNode;
 friend class <int> ArcNode;
 private
-    VertexNode <int , char > * VertexesTable;
+    VertexNode <int, char> * VertexesTable;
     int * InDegree; //入度数组，记录每一个顶点的入度   
-	int CurrentNumVertexes; 当前的顶点数    
+	int CurrentNumVertexes; //当前的顶点数    
    	int CurrentNumArcs; //当前的边（或弧）数
     int GetVertexPos( const char &v );// 取顶点v在数组中的位置
 public:
@@ -71,18 +73,20 @@ CurrentNumVertexes(0), CurrentNumArcs(0){
     VertexesTable = new VertexNode<int, char>[MaxVertexes];
     InDegree = new int [MaxVertexes];// 创建入度表
     for ( int i = 0; i < num; i++){  // 输入各顶点信息
-      	InsertVertex ( v[ i ] ); 
+      	InsertVertex (v[i]); 
       	InDegree [i]=0; 
     }    
 	cin >> e;                    //输入边的条数
     for ( i = 0; i < e; i++) {   //逐条输入边
        cin >> tail >> head >> w; //输入一条边
-       while ((t = GetVertexPos ( tail ))==-1)
-            cout<<"输入的顶点(tail)不存在"; 
-       while ((h = GetVertexPos ( head ))==-1)
-             cout<<"输入的顶点(head)不存在";
-       InsertArc ( k, j, weight );    //插入一条边
-       InDegree[j]++;  //顶点j的入度加一
+       if((t = GetVertexPos ( tail ))==-1){
+         	cout<<"输入的顶点(tail)不存在"; 
+       }else if((h = GetVertexPos ( head ))==-1){
+         	cout<<"输入的顶点(head)不存在";
+       }else{
+         	InsertArc ( k, j, weight ); //插入一条边
+         	InDegree[j]++;              //顶点j的入度加一
+       }
     }     
 }
 ```
@@ -93,8 +97,8 @@ CurrentNumVertexes(0), CurrentNumArcs(0){
 
 （1）建立入度为零的顶点栈；		
 （2）当入度为零的顶点栈为空时算法转步骤（6），否则继续步骤（3）；		
-（3）入度为零的顶点栈中栈顶元素v出栈,并输出之顶点v；		
-（4）从AOV网络中删去顶点v和所有从顶点v发出的弧&lt;v、j>，并将顶点j的入度减一；		
+（3）入度为零的顶点栈中栈顶元素v出栈，并输出之顶点v；		
+（4）从AOV网络中删去顶点v和所有从顶点v发出的弧&lt;v,j>，并将顶点j的入度减一；		
 （5）如果顶点j入度减至0，则将该顶点进入入度为零的顶点栈；转步骤（2）；		
 （6）如果输出顶点个数少于AOV网络的顶点个数，则输出网络中存在有向环的信息；算法结束。
 
@@ -120,7 +124,7 @@ void Graph :: TopologicalSort ( ) {
        	n++; //  输出的顶点数加一
        	cout << VertexesTable[j].data << endl;       
       	p = VertexesTable[j].firstarc; 
-       	while ( p ) {            	  //扫描以顶点j为弧尾的所有弧
+       	while (p) {            	      //扫描以顶点j为弧尾的所有弧
          	int k = p->adjvex;        //取弧头顶点为k
          	if (--InDegree[k] == 0){  //顶点k的入度减一
             	count[k] = top;  
@@ -134,9 +138,74 @@ void Graph :: TopologicalSort ( ) {
 }
 ```
 
+### 拓扑排序的算法实现
+
+邻接表结构
+
+![](img/邻接表3.png)
+
+```c++
+typedef struct EdgeNode // 边表结点
+{
+	int adjvex;    // 邻接点域，存储该顶点对应的下标
+	int weight;	   // 用于存储权值，对于非网图可以不需要
+	struct EdgeNode *next; // 链域，指向下一个邻接点
+}EdgeNode;
+
+typedef struct VertexNode // 顶点表结点
+{
+	int in;	// 顶点入度
+	int data; // 顶点域，存储顶点信息
+	EdgeNode *firstedge; // 边表头指针
+}VertexNode, AdjList[MAXVEX];
+
+typedef struct
+{
+	AdjList adjList; 
+	int numVertexes,numEdges; // 图中当前顶点数和边数
+}graphAdjList,*GraphAdjList;
+```
+
+拓扑排序
+
+```c++
+Status TopologicalSort(GraphAdjList GL)
+{    
+	EdgeNode *e;    
+	int i,k,gettop;   
+	int top=0;   // 用于栈指针下标
+	int count=0; // 用于统计输出顶点的个数
+	int *stack;	 // 建栈将入度为0的顶点入栈 
+	stack=(int *)malloc(GL->numVertexes * sizeof(int) );    
+
+	for(i = 0; i<GL->numVertexes; i++)                
+		if(0 == GL->adjList[i].in) // 将入度为0的顶点入栈      
+			stack[++top]=i;    
+	while(top!=0)    
+	{        
+		gettop=stack[top--];        
+		printf("%d -> ",GL->adjList[gettop].data);        
+		count++;        // 输出i号顶点，并计数     
+		for(e = GL->adjList[gettop].firstedge; e; e = e->next)        
+		{            
+			k=e->adjvex;            
+			if( !(--GL->adjList[k].in) ) // 将i号顶点的邻接点的入度减1，如果减1后为0，则入栈            
+				stack[++top]=k;        
+		}
+	}   
+	printf("\n");   
+	if(count < GL->numVertexes)        
+		return ERROR;    
+	else       
+		return OK;
+}
+```
+
 ## 用边表示活动的网络 
 
 在一个带权有向无环图中，用弧表示一个工程中的各项活动(Activity)，用弧上的权值表示相应活动的持续时间(Duration)，用顶点表示事件(Event)，则这样的有向图叫做用边表示活动的网络，简称AOE网络。
+
+如图所示，所示是一个有7个事件和10个活动的AOE网络。其中，事件A发生表示整个工程的开始，事件G发生表示整个工程的结束。其他每一个事件的发生表示以该事件相应的顶点为弧头的弧所代表的活动都已完成，以该事件相应的顶点为弧尾的弧所代表的活动可以开始。例如，事件B发生表示活动a1已经完成，活动a4和a5可以开始。与活动相对应的弧上的权值可以用来表示完成该活动所需的时间。例如，完成活动a1需要3天时间，完成活动a2需要6天时间等等。
 
 ![](img/活动网络2.png) 
 
@@ -160,11 +229,11 @@ AOE网络在某些工程估算方面是非常有用的。例如，人们通过AO
 
 （2）事件Vi的最迟允许发生时间：在保证整个工程不推迟完成的前提下，顶点Vi 所对应的事件的最迟允许发生时间，用Vl[i]表示。
 
-（3）活动ak 的最早可能开始时间 e[k]：设活动ak 对应的弧为&lt;Vi,Vj>，则e[k]是从源点V0到顶点Vi 的最长路径长度。因此, e[k] = Ve[i]。
+（3）活动 ak 的最早可能开始时间 e[k]：设活动ak 对应的弧为<Vi,Vj>，则e[k]是从源点V0到顶点Vi 的最长路径长度。因此, e[k] = Ve[i]。
 
-（4）活动ak 的最迟允许开始时间 l[k]：l[k]是在保证整个工程不推迟完成的前提下，活动ak的最迟允许开始时间。显然，l[k] = Vl[j] - dur(&lt;i,j>) 。其中，dur(&lt;i,j>) 是完成 ak 所需的时间。
+（4）活动 ak 的最迟允许开始时间 l[k]：l[k]是在保证整个工程不推迟完成的前提下，活动ak的最迟允许开始时间。显然，l[k] = Vl[j] - dur(<i,j>) 。其中，dur(<i,j>) 是完成 ak 所需的时间。
 
-（5）活动ak 的时间余量：活动ak 的最迟允许开始时间和最早可能开始时间之差（l[k]-e[k]）。显然，时间余量为零的活动ak（l[k]==e[k]）是关键活动。
+（5）活动 ak 的时间余量：活动 ak 的最迟允许开始时间和最早可能开始时间之差（l[k]-e[k]）。显然，时间余量为零的活动ak（l[k]==e[k]）是关键活动。
 
 为找出关键活动，需要求各个活动的e[k]与l[k]，以判别是否l[k]==e[k]。而为了求得e[k]与l[k]，需要先求得各个顶点Vi 的Ve[i]和Vl[i]。 
 
@@ -174,17 +243,17 @@ AOE网络在某些工程估算方面是非常有用的。例如，人们通过AO
 
 从Ve[0] = 0开始，向前递推
 
-iVe[j] = Max{ Ve[i] + dur(&lt;i,j>) | &lt;Vi,Vj> ∈ T }, j = 1, 2, ..., n-1;
+Ve[j] = Max{ Ve[i] + dur(&lt;i,j>) | &lt;Vi,Vj> ∈ T }, j = 1, 2, ..., n-1;
 
-其中, T是所有以顶点Vj为弧头的弧&lt;Vi、Vj>的集合。
+其中, T是所有以顶点Vj为弧头的弧&lt;Vi,Vj>的集合。
 
 （2）第二步：求Vl[i]的递推公式
 
 从Vl[n-1] = Ve[n-1]开始，反向递推
 
-jVl[i] = Min{ Vl[j] - dur(&lt;i,j>) | &lt;Vi,Vj> ∈ T }, i =0, 1, 2, ..., n-2;
+Vl[i] = Min{ Vl[j] - dur(&lt;i,j>) | &lt;Vi,Vj> ∈ T }, i =0, 1, 2, ..., n-2;
 
-其中, T是所有以顶点Vi为弧尾的弧&lt; Vi,Vj >的集合。
+其中, T是所有以顶点Vi为弧尾的弧&lt;Vi,Vj>的集合。
 
 当求出了AOE网络中每个顶点Vi的Ve[i]和Vl[i]，就可以再计算每一个活动ak的最早可能开始时间e[k]和最晚允许开始时间l[k]。
 
@@ -243,11 +312,12 @@ void graph :: CriticalPath ( ) {
        p = VertexesTable[i].firstarc;
        while ( p != NULL ) {
          j = p->adjvex;	
-         e = Ve[i];  l = Vl[j] - p->weight;
+         e = Ve[i];  
+         l = Vl[j] - p->weight;
          if ( l == e ) 
-          cout<< "<" << VertexesTable[i].data
-             << "," <<VertexesTable[j].data<< ">"
-            << "是关键活动" << endl;
+          cout<< "<" << VertexesTable[i].data << ","
+              << VertexesTable[j].data << ">"
+              << "是关键活动" << endl;
          p = p->nextarc;        
        }
     }
