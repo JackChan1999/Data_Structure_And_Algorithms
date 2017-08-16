@@ -10,7 +10,7 @@ HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有�
 ## 2. HashMap的数据结构
 在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，HashMap也不例外。HashMap实际上是一个“链表散列”的数据结构，即数组和链表的结合体。
 
-![hashmap](../assets/6.1.jpg)
+![hashmap](images/6.1.jpg)
 
 从上图中可以看出，HashMap底层就是一个数组结构，数组中的每一项又是一个链表。当新建一个HashMap的时候，就会初始化一个数组
 
@@ -20,7 +20,7 @@ HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有�
 
 ## 4. HashMap
 
-![hashmap](http://lvable.com/wp-content/uploads/2015/08/QQ%E6%88%AA%E5%9B%BE20150823235946.png)
+![hashmap](images/hashmap实现原理1.png)
 
 Java库里的HashMap其实是一个连续的链表数组，通过让key计算hash值后插入对应的index里。当hash值发生碰撞时，可以采用线性探测，二次hash，或者后面直接变成链表的结构来避免碰撞。因为hash的值不是连续的，所以hashmap实际需要占用的大小会比它实际能装的item的容量要大。我们可以看一下HashMap的源码:
 
@@ -54,13 +54,13 @@ Java库里的HashMap其实是一个连续的链表数组，通过让key计算has
 
 ArrayMap是怎么实现节省内存的呢？先放数据结构图：
 
-![hashmap](http://lvable.com/wp-content/uploads/2015/08/QQ%E6%88%AA%E5%9B%BE20150824001700.png)
+![hashmap](images/ArrayMap_1.png)
 
 他用两个数组来模拟Map，第一个数组存放存放item的hash值，第二数组是把key，value连续的存放在数组里，通过先算hash在第一个数组里找到它的hash index，根据这个index在去第二个数组里找到这个key-value。
 
 在这里，在第一个数组里查找hash index的方法当然是用二分查找啦（binary search）。
 
-![hashmap](http://lvable.com/wp-content/uploads/2015/08/QQ%E6%88%AA%E5%9B%BE20150824002101.png)
+![hashmap](images/ArrayMap_2.png)
 
 这个数据结构的设计就做到了，有多个item我就分配多少内存，做到了memory的节约。并且因为数据结构是通过数组组织的，所以遍历的时候可以用index直接遍历也是很方便的有没有！但是缺点也很明显，查找达不到HashMap O(1)的查找时间。
 
@@ -168,7 +168,7 @@ class HashMapEntry{
 
 ```
 
-![hashmap](../assets/6.2.png)
+![hashmap](images/6.2.png)
 
 ## 二次哈希
 
@@ -250,9 +250,9 @@ hashCode()，哈希值，HashSet的元素会根据哈希值存储，哈希值一
 
 ## ArrayList与HashSet的区别
 
-![](http://img.blog.csdn.net/20170107121446088?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
-![](http://img.blog.csdn.net/20170107121506556?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
-![](http://img.blog.csdn.net/20170107121518650?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![](images/hashmap实现原理6.png)
+![](images/hashmap实现原理4.png)
+![](images/hashmap实现原理5.png)
 
 
 ##  Android 5.0之后对HashMap的修改
@@ -263,9 +263,9 @@ hashCode()，哈希值，HashSet的元素会根据哈希值存储，哈希值一
 
 下图左边为Android 5.0的源码,右边为Android 4.4的源码
 
-![hashmap](http://img.blog.csdn.net/20150720165111251?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+![hashmap](images/hashmap实现原理2.png)
 
-![hashmap](http://img.blog.csdn.net/20150720165133581?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+![hashmap](images/hashmap实现原理3.png)
 
 从源码中可以看到,Android 5.0 在计算key的HashCode使用的是下面的算法.
 
