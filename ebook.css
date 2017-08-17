@@ -1,0 +1,582 @@
+/* GENERAL ELEMENTS */
+
+/* clear both */
+
+.clear {
+    clear: both;
+}
+
+.section > :last-child {
+    margin-bottom: 0 !important;
+}
+
+.section > :first-child {
+    margin-top: 0 !important;
+}
+
+/* SPECIAL ELEMENTS */
+
+/* page break always after element on pdf/print definition */
+
+div.pagebreak {
+    page-break-after: always;
+}
+
+/* no page break inside element on pdf/print definition */
+
+div.nopb {
+    page-break-inside: avoid !important;
+    margin: 4px 0 4px 0;
+}
+
+/* note blocks */
+
+div.note {
+    background: #FCF8E3 none repeat scroll 0% 0%;
+    color: #8A6D3B;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-bottom: 5px solid #DDD;
+    border-color: #FAEBCC;
+    page-break-inside: avoid;
+}
+
+div.note p {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+/* images, figures and captions */
+
+figure {
+    margin: 1.0em 0px;
+    padding: 10px 0;
+    text-align: center;
+    page-break-inside: avoid;
+    display: block;
+}
+
+figure img {
+    display: block;
+    margin: 0 auto;
+}
+
+figcaption {
+    clear: left;
+    margin: 1.0em 0 0 0;
+    text-align: center;
+    font-style: italic;
+    line-height: 1.5em;
+    font-size: 80%;
+    color: #666;
+    display: block;
+}
+
+.page .section p img {
+    margin-top: 10px;
+}
+
+/* ul, ol list margin fix */
+
+.page .section ol,
+.page .section ul {
+    margin-bottom: 10px;
+}
+
+/* blockquotes */
+
+.page .section blockquote {
+    margin: 0 0 0 5%;
+    font-style: italic;
+}
+
+/* PAGE SPECIFIC */
+
+/* set summary page to right side of the paper */
+
+.page .toc h1 {
+    page-break-before: right;
+}
+
+.page .section.toc  {
+    page-break-inside: always;
+}
+
+/* table headers */
+
+div#README\.md table {
+    margin-top: 30px;
+    font-size: 95%;
+}
+
+div#README\.md table thead {
+    display: none;
+}
+
+/*
+div#README\.md > :last-child {
+    page-break-after: avoid !important;
+}
+div#foreword\.md > :first-child {
+    page-break-before: avoid !important;
+}
+*/
+
+/* part 1 and 2 image align */
+
+div#part1\/index\.md,
+div#part2\/index\.md {
+    text-align: center;
+}
+
+div#part1\/index\.md img,
+div#part2\/index\.md img {
+    margin-top: 50px;
+    max-width: 99%;
+}
+
+/* big number */
+
+div#part1\/pointline\.md pre {
+    text-align: center;
+    font-size: 120%;
+}
+
+/* kalevala quote */
+
+div#part1\/pointline\.md blockquote {
+    text-align: center;
+    border: 0;
+    margin: 0;
+}
+
+/* appendixes */
+
+div#appendix1\.md ol:nth-child(1),
+div#appendix1\.md ol:nth-child(2),
+div#appendix1\.md ol:nth-child(3) {
+    list-style-type: lower-alpha;
+}
+
+div#appendix2\.md table thead th:nth-child(5) {
+    width: 22%;
+}
+
+div#appendix2\.md table tbody td:nth-child(5) {
+    text-align: center;
+}
+
+div#appendix2\.md table img {
+    max-height: 33%;
+    height: 90px;
+}
+
+.page .section div#appendix2\.md table a img.faded {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)"; /* IE 8 */
+    filter: alpha(opacity=20);  /* For IE7 and earlier */
+    -moz-opacity: 0.2;          /* Netscape */
+    -khtml-opacity: 0.2;        /* Safari 1.x */
+    opacity: 0.2;               /* Rest */
+    position: relative;
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+div#appendix2\.md table,
+div#appendix2\.md table thead,
+div#appendix2\.md table tbody {
+    page-break-inside: auto;
+}
+
+/* backcover adjust */
+
+div#backcover\.md {
+    width: 89%;
+    margin: 0 auto;
+}
+
+div#backcover\.md div.author {
+    float:right;
+    width: 27%;
+    text-align: center;
+}
+
+div#backcover\.md > :first-child {
+    page-break-before: right;
+}
+
+/* keywords */
+
+div#keywords\.md > :last-child {
+    page-break-after: left;
+}
+
+/* new items page break after every item */
+
+div#newitems\.md h3 {
+    page-break-before: always;
+}
+
+
+/* CITATION AND IMAGES */
+
+/* math image styles */
+
+.page .section p img.svg,
+.page .section p img.png {
+    margin-top: 0px;
+    margin-bottom: -2px;
+}
+
+.page .section p img.math {
+    vertical-align: middle;
+    height: auto; 
+    width: auto;
+    margin-top: -4px;
+    max-height: 15px;
+}
+.page .section p img.math.line1 {
+    margin-top: -7px;
+    max-height: 19px;
+}
+.page .section p img.math.line2 {
+    margin-top: -1px;
+    max-height: 30px;
+}
+
+/* credits page */
+
+.page .section ul.pictures {
+    margin-left: -30px;
+}
+
+.page .section ul.pictures li {
+    list-style: outside none none;
+}
+
+.page .section ul.pictures li a {
+    float: left;
+}
+
+.page .section ul.pictures li span {
+    display: block;
+    margin-left: 100px;
+}
+
+/* remove barcode pictures */
+
+.page .section ul.pictures li:nth-last-child(1),
+.page .section ul.pictures li:nth-last-child(2),
+.page .section ul.pictures li:nth-last-child(3) {
+    display: none;
+}
+
+/* sub and super script */
+
+.page .section sub {
+    font-size: 80%;
+    margin-left: 1px;
+}
+
+/* citations and references */
+
+.page .section sup {
+    margin-left: -1px;
+    margin-right: 2px;
+    font-size: 80%;
+}
+
+.page .section sup:before {
+    content: " ";
+}
+
+.page .section sup a {}
+
+.page .section ul.citations,
+.page .section ul.references {
+    margin-left: -30px;
+}
+/*
+.page .section ul.citations li a,
+.page .section ul.references li a {
+    float: left;
+}
+*/
+.page .section ul.citations li:nth-child(1) {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #BBB;
+}
+
+.page .section ul.citations li,
+.page .section ul.references li {
+    list-style: outside none none;
+}
+
+.page .section ul.citations li {
+    font-size: 80%;
+}
+
+.page .section ul.citations li > span:nth-child(1),
+.page .section ul.references li > span:nth-child(1) {
+    display: block;
+    float: left;
+    text-align: left;
+    width: 70px
+}
+
+.page .section ul.citations li > span:nth-child(1) {
+    width: 50px
+}
+
+.page .section ul.references li div {
+    margin-left: 70px;
+}
+
+.page .section ul.citations li div {
+    margin-left: 50px;
+}
+
+.page .section a[href="#"],
+.page .section a[href="#"]:link,
+.page .section a[href="#"]:visited,
+.page .section a[href="#"]:hover,
+.page .section a[href="#"]:focus {
+    text-decoration: none;
+    color: inherit;
+    cursor: text;
+    font-style: italic;
+}
+
+/* self referential footnotes */
+
+.page .section div[type="selfref"] a[href="#"],
+.page .section div[type="selfref"] a[href="#"]:link,
+.page .section div[type="selfref"] a[href="#"]:visited,
+.page .section div[type="selfref"] a[href="#"]:hover,
+.page .section div[type="selfref"] a[href="#"]:focus {
+    font-style: normal;
+}
+
+.page .section div[type="selfref"] span:nth-child(1) {
+    display: none;
+}
+
+/* IMAGE STYLES */
+
+/* hexagon, hexagram and six-spoked wheel */
+
+figure#fig4\.3\.10,
+figure#fig4\.3\.11,
+figure#fig4\.3\.12 {
+    float: left;
+    width: 33%;
+}
+
+figure#fig4\.3\.10 img,
+figure#fig4\.3\.11 img,
+figure#fig4\.3\.12 img {
+    width: 240px;
+}
+
+/* hittite suns */
+
+figure#fig5\.3\.1,
+figure#fig5\.3\.2 {
+    float: left;
+    width: 48%;
+    margin: 0 5px;
+}
+
+/* hittite sun 1 and 2 models */
+
+figure#fig5\.3\.3,
+figure#fig5\.3\.6 {
+    margin: 0 5px;
+}
+
+figure#fig5\.3\.4,
+figure#fig5\.3\.5,
+figure#fig5\.3\.7,
+figure#fig5\.3\.8 {
+    float: left;
+    width: 48%;
+    margin: 0 5px;
+}
+
+figure#fig5\.3\.4 img,
+figure#fig5\.3\.5 img,
+figure#fig5\.3\.7 img,
+figure#fig5\.3\.8 img {
+    width: 185px;
+}
+
+/* pomegranates */
+
+figure#fig5\.5\.1,
+figure#fig5\.5\.2 {
+    float: left;
+    width: 48%;
+    margin: 0 5px;
+}
+
+/* coin */
+
+figure#fig5\.5\.2 img {
+    width: 250px;
+    margin: 60px;
+}
+
+/* lilies */
+
+figure#fig5\.5\.4,
+figure#fig5\.5\.5 {
+    float: left;
+    width: 48%;
+    margin: 0 5px;
+}
+
+/* distaff blades */
+
+figure#fig6\.2,
+figure#fig6\.3,
+figure#fig6\.4 {
+    float: left;
+    width: 31%;
+    margin: 0 5px;
+}
+
+/* classification images */
+
+/* class 0 */
+figure#fig9\.2,
+figure#fig9\.3 {
+    float:left;
+    width: 47%;
+    margin: 0 5px;
+}
+figure#fig9\.3 img {width: 186px;}
+figure#fig9\.2 img {width: 330px;}
+
+/* class 1 */
+figure#fig9\.4,
+figure#fig9\.5 {
+    float:left;
+    width: 47%;
+    margin: 0 5px;
+}
+figure#fig9\.5 img {width: 170px;}
+figure#fig9\.4 img {width: 360px;}
+
+/* class 2 */
+figure#fig9\.6,
+figure#fig9\.7 {
+    float:left;
+    width: 47%;
+    margin: 0 5px;
+}
+figure#fig9\.7 img {width: 184px;}
+figure#fig9\.6 img {width: 330px;}
+
+/* class 3 */
+figure#fig9\.8,
+figure#fig9\.9 {
+    float:left;
+    width: 47%;
+    margin: 0 5px;
+}
+figure#fig9\.9 img {width: 183px;}
+figure#fig9\.8 img {width: 335px;}
+
+/* bar codes */
+
+figure#fig15\.1,
+figure#fig15\.2,
+figure#fig15\.3 {
+    float:left;
+    width: 30%;
+    margin: 0 5px;
+}
+
+figure#fig15\.1 img,
+figure#fig15\.2 img,
+figure#fig15\.3 img {
+    width: 75%;
+}
+
+figure#fig15\.1:after {
+    content: "PDF";
+}
+figure#fig15\.2:after {
+    content: "EPUB";
+}
+figure#fig15\.3:after {
+    content: "MOBI";
+}
+
+figure#fig15\.1 figcaption,
+figure#fig15\.2 figcaption,
+figure#fig15\.3 figcaption {
+    display: none;
+}
+
+/* page break always after element on pdf/print definition */
+
+div.page-break {
+    page-break-inside: always;
+}
+
+div.page-break:before {
+    content: ' ';
+}
+
+/* no page break inside element on pdf/print definition */
+
+div.nopb {
+    page-break-inside: avoid;
+}
+
+/* page header and footer */
+
+.pdf-footer,
+.pdf-header {
+    margin-top: 20px;
+    color: #aaa;
+}
+.pdf-footer .sub {
+    padding-top: 8px;
+    font-size: 70%;
+}
+.pdf-header .sub {
+    padding-top: 2px;
+    font-size: 70%;
+}
+.pdf-footer {
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+.pdf-footer .footer-pages-count {
+    float: right;
+}
+.pdf-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.pdf-header .header-pages-count {
+    float: right;
+    text-align: right;
+}
+.pdf-header .header-pages-count a,
+.pdf-header .header-pages-count a:visited,
+.pdf-header .header-pages-count a:active,
+.pdf-header .header-pages-count a:focus,
+.pdf-header .header-pages-count a:link {
+    text-decoration: none;
+    color: #aaa;
+    cursor: text;
+}
+
+#class-3 {
+    margin-top: 220px;
+}

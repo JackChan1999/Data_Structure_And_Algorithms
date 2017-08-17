@@ -1,10 +1,18 @@
 {
     "author": "AllenIverson",
     "description": "数据结构和算法",
-    "gitbook": "3.2.2",
+    "gitbook": "3.2.3",
     "language": "zh-hans",
     "title": "数据结构和算法",
     "pdf": {
-        "fontFamily": "等线"
+        "fontFamily": "微软雅黑"
+    },
+
+    "styles": {
+        "website": "website.css",
+        "ebook": "ebook.css",
+        "pdf": "ebook.css",
+        "mobi": "epub.css",
+        "epub": "epub.css"
     }
 }

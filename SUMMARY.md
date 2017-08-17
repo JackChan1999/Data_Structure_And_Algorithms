@@ -160,10 +160,10 @@
   * [Prim算法](9.图/Prim算法.md)
   * [最短路径](9.图/最短路径.md)
   * [Dijkstra算法](9.图/Dijkstra算法.md)
-  * [Dijkstra最短路算法](9.图/Dijkstra最短路算法.md)
+  * [Dijkstra最短路径算法](9.图/Dijkstra最短路径算法.md)
   * [BellmanFord算法](9.图/BellmanFord算法.md)
   * [Floyd算法](9.图/Floyd算法.md)
-  * [只有五行的Floyd最短路算法](9.图/只有五行的Floyd最短路算法.md)
+  * [只有五行的Floyd最短路径算法](9.图/只有五行的Floyd最短路径算法.md)
   * [AOV网络和拓扑排序](9.图/AOV网络和拓扑排序.md)
 
 ----
