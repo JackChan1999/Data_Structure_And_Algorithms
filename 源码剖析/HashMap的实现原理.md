@@ -50,7 +50,7 @@ Java库里的HashMap其实是一个连续的链表数组，通过让key计算has
 
 你会发现它又一个变量叫loadfactor，还有threshold。threshold就是临界值的意思，代表当前HashMap的储存机构能容纳的最大容量，它等于loadfactor * 容量。当HashMap记录存入的item size大于threshold后，HashMap就会进行扩容（resize）。当我们第一次新建一个HashMap对象的时候，默认的容量是16，若你只打算在HashMap里放入3个元素那将浪费至少13个空间。
 
-## 6. ArrayMap
+## 5. ArrayMap
 
 ArrayMap是怎么实现节省内存的呢？先放数据结构图：
 
@@ -66,7 +66,7 @@ ArrayMap是怎么实现节省内存的呢？先放数据结构图：
 
 当要存储的对象较少的时候（1000以下的时候）可以考虑用ArrayMap来减少内存的占用。
 
-## 7. hashmap和hashtable的区别
+## 6. hashmap和hashtable的区别
 
 > http://www.233.com/ncre2/JAVA/jichu/20100717/084230917.html
 
@@ -86,11 +86,11 @@ HashTable不允许null值(key和value都不可以),HashMap允许null值(key和va
 
 HashTable有一个contains(Object value)，功能和containsValue(Object value)功能一样。
 
-5、HashTable使用Enumeration，HashMap使用Iterator。
+HashTable使用Enumeration，HashMap使用Iterator。
 
-6、HashTable中hash数组默认大小是11，增加的方式是 old*2+1。HashMap中hash数组的默认大小是16，而且一定是2的指数。
+HashTable中hash数组默认大小是11，增加的方式是 old*2+1。HashMap中hash数组的默认大小是16，而且一定是2的指数。
 
-7、哈希值的使用不同，HashTable直接使用对象的hashCode，代码是这样的：
+哈希值的使用不同，HashTable直接使用对象的hashCode，代码是这样的：
 
 ```java
 　int hash = key.hashCode();
@@ -106,23 +106,15 @@ int i = indexFor(hash, table.length);
 static int hash(Object x) {
 
     int h = x.hashCode();
-    
     h += ~(h << 9);
-    
     h ^= (h >>> 14);
-    
     h += (h << 4);
-    
     h ^= (h >>> 10);
-    
     return h;
-
 }
 
 static int indexFor(int h, int length) {
-
     return h & (length-1);
-
 }
 ```
 
@@ -144,17 +136,13 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
 
     private static final Entry[] EMPTY_TABLE = new HashMapEntry[MINIMUM_CAPACITY >>> 1];
     transient HashMapEntry<K, V>[] table;
-
-
-
+	
     static class HashMapEntry<K, V> implements Entry<K, V> {
         final K key;
         V value;
         final int hash;
         HashMapEntry<K, V> next;
-
     }
-
 }
 ```
 
@@ -196,7 +184,7 @@ private static int secondaryHash(int h) {
         h ^= (h >>>  6);
         h += (h <<   2) + (h << 14);
         return h ^ (h >>> 16);
-    }
+}
 ```
 
 table 是一个大小为 2 n 的一维数组，其中存放的是一个个的 HashMapEntry，而 HashMapEntry 是包含了 hash、key 与 value 值及一个指向 HashMapEntry 的 next 指针
