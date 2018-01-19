@@ -73,9 +73,9 @@ public V put(K key, V value) {
     if (key == null)
         return putForNullKey(value);
     //计算key的hash值
-    int hash = hash(key.hashCode());                  ------(1)
+    int hash = hash(key.hashCode());                  //------(1)
     //计算key hash 值在 table 数组中的位置
-    int i = indexFor(hash, table.length);             ------(2)
+    int i = indexFor(hash, table.length);             //------(2)
     //从i出开始迭代 e,找到 key 保存的位置
     for (Entry<K, V> e = table[i]; e != null; e = e.next) {
         Object k;

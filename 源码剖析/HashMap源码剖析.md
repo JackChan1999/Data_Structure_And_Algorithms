@@ -732,7 +732,6 @@ public class HashMap<K,V>
         }    
     }    
    
-   
     private static final long serialVersionUID = 362498820763181265L;    
    
     // java.io.Serializable的读取函数：根据写入方式读出    
@@ -921,7 +920,7 @@ put方法稍微复杂些，代码如下：
   
       // 若“该key”对应的键值对不存在，则将“key-value”添加到table中    
       modCount++;  
-//将key-value添加到table[i]处  
+	  //将key-value添加到table[i]处  
       addEntry(hash, key, value, i);    
       return null;    
   }   
@@ -1021,9 +1020,9 @@ void transfer(Entry[] newTable) {
 
 ```java
 static int hash(int h) {  
-        h ^= (h >>> 20) ^ (h >>> 12);  
-        return h ^ (h >>> 7) ^ (h >>> 4);  
-    }  
+	h ^= (h >>> 20) ^ (h >>> 12);  
+	return h ^ (h >>> 7) ^ (h >>> 4);  
+}  
 ```
 
 它只是一个数学公式，IDK这样设计对hash值的计算，自然有它的好处，至于为什么这样设计，我们这里不去追究，只要明白一点，用的位的操作使hash值的计算效率很高。
@@ -1031,8 +1030,8 @@ static int hash(int h) {
 由hash值找到对应索引的方法如下：
 ```java
 static int indexFor(int h, int length) {  
-        return h & (length-1);  
-    }  
+	return h & (length-1);  
+}  
 ```
 
 这个我们要重点说下，我们一般对哈希表的散列很自然地会想到用hash值对length取模（即除法散列法），Hashtable中也是这样实现的，这种方法基本能保证元素在哈希表中散列的比较均匀，但取模会用到除法运算，效率很低，HashMap中则通过h&(length-1)的方法来代替取模，同样实现了均匀的散列，但效率要高很多，这也是HashMap对Hashtable的一个改进。

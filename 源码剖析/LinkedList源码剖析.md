@@ -194,8 +194,7 @@ public class LinkedList<E>
     // 获取双向链表中指定位置的节点    
     private Entry<E> entry(int index) {    
         if (index < 0 || index >= size)    
-            throw new IndexOutOfBoundsException("Index: "+index+    
-                                                ", Size: "+size);    
+            throw new IndexOutOfBoundsException("Index: "+index+", Size: "+size);    
         Entry<E> e = header;    
         // 获取index处的节点。    
         // 若index < 双向链表长度的1/2,则从前先后查找;    
@@ -496,7 +495,7 @@ public class LinkedList<E>
          * 链表节点的构造函数。   
          * 参数说明：   
          *   element  —— 节点所包含的数据   
-         *   next      —— 下一个节点   
+         *   next     —— 下一个节点   
          *   previous —— 上一个节点   
          */   
         Entry(E element, Entry<E> next, Entry<E> previous) {    
@@ -557,8 +556,7 @@ public class LinkedList<E>
             itr.remove();    
         }    
     }    
-   
-   
+	
     // 返回LinkedList的Object[]数组    
     public Object[] toArray() {    
     // 新建Object[]数组    
@@ -588,8 +586,7 @@ public class LinkedList<E>
    
         return a;    
     }    
-   
-   
+	
     // 克隆函数。返回LinkedList的克隆对象。    
     public Object clone() {    
         LinkedList<E> clone = null;    
@@ -682,7 +679,7 @@ private static class Entry<E> {
      * 链表节点的构造函数。   
      * 参数说明：   
      *   element  —— 节点所包含的数据   
-     *   next      —— 下一个节点   
+     *   next     —— 下一个节点   
      *   previous —— 上一个节点   
      */   
     Entry(E element, Entry<E> next, Entry<E> previous) {    
